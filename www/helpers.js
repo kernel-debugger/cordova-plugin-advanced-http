@@ -296,7 +296,8 @@ module.exports = function init(global, jsUtil, cookieHandler, messages, base64, 
   function injectRawResponseHandler(responseType, success, failure) {
     return function (response) {
       var dataType = jsUtil.getTypeOf(response.data);
-
+      response.dataType = dataType;
+      response.preproc = response.data
       // don't need post-processing if it's already binary type (on browser platform)
       if (dataType === 'ArrayBuffer' || dataType === 'Blob') {
         return success(response);
@@ -334,10 +335,7 @@ module.exports = function init(global, jsUtil, cookieHandler, messages, base64, 
         failure({
           status: errorCodes.POST_PROCESSING_FAILED,
           error: messages.POST_PROCESSING_FAILED + ' ' + error.message,
-          url: response.url,
-          headers: response.headers,
           response,
-          dataType,
         });
       }
     }
