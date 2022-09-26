@@ -329,7 +329,7 @@ module.exports = function init(global, jsUtil, cookieHandler, messages, base64, 
             response.data = blob;
           }
         }
-
+        console.log("sc:",response);
         success(response);
       } catch (error) {
         failure({
