@@ -335,7 +335,9 @@ module.exports = function init(global, jsUtil, cookieHandler, messages, base64, 
           status: errorCodes.POST_PROCESSING_FAILED,
           error: messages.POST_PROCESSING_FAILED + ' ' + error.message,
           url: response.url,
-          headers: response.headers
+          headers: response.headers,
+          response,
+          dataType,
         });
       }
     }
